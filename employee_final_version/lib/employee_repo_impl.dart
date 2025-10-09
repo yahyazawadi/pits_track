@@ -1,10 +1,10 @@
-import 'package:employee_oop/employee_repo/employee_repo.dart';
-import 'package:employee_oop/models/employee_model.dart';
+import 'package:employee_oop/employee_repo.dart';
+import 'package:employee_oop/employee_model.dart';
 import 'package:employee_oop/pay_type_enum.dart';
 import 'package:collection/collection.dart';
 
 class EmployeeRepositoryImplementation implements EmployeeRepository {
-  List<Employee> _employees = [];
+  final List<Employee> _employees = [];
   @override
   void addEmployee(Employee employee) {
     _employees.add(employee);

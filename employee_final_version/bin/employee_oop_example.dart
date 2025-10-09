@@ -1,13 +1,12 @@
-import 'package:employee_oop/models/imp/daily_employee.dart';
-import 'package:employee_oop/models/imp/hourly_employee.dart';
-import 'package:employee_oop/models/imp/monthly_employee.dart';
+import 'package:employee_oop/Salary.dart';
+import 'package:employee_oop/employee_model.dart';
 import 'package:employee_oop/pay_type_enum.dart';
-import 'package:employee_oop/employee_repo/employee_repo_impl.dart';
+import 'package:employee_oop/employee_repo_impl.dart';
 
 void main() {
   final repo = EmployeeRepositoryImplementation();
 
-  var emp1 = DailyEmployee(
+  var emp1 = Employee.daily(
     birthdate: DateTime(1995, 4, 12),
     fullName: "Ali Hasan",
     payRate: 50.0,
@@ -16,7 +15,7 @@ void main() {
     department: "Maintenance",
   );
 
-  var emp2 = HourlyEmployee(
+  var emp2 = Employee.hourly(
     birthdate: DateTime(1998, 9, 20),
     fullName: "Sara Ahmad",
     payRate: 10.0,
@@ -25,7 +24,7 @@ void main() {
     //department: "HR",
   );
 
-  var emp3 = MonthlyEmployee(
+  var emp3 = Employee.monthly(
     birthdate: DateTime(1990, 2, 5),
     fullName: "Mohammad Ali",
     payRate: 3000.0,
@@ -48,9 +47,6 @@ void main() {
  ''');
   for (var e in repo.getAllEmployees()) {
     print(e);
-    print(
-      "Total Salary: ${e.calculateTotalSalary(bonusTime: 5, bonusRate: 1.2)}\n",
-    );
   }
 
   print('''
@@ -67,12 +63,18 @@ void main() {
 
   print('''
 =================
- get Employees by PayType: hourly
+ get Employees by PayType: hourly, and print salary details
 =================
  ''');
   var hourly = repo.getEmployeesByPayType(PayType.hourly);
   for (var e in hourly) {
     print(e.fullName);
+    final salary = Salary(e);
+    print("Base Salary: \$${salary.calculateBaseSalary()}");
+    print("Bonus: \$${salary.calculateBonus(bonusTime: 10, bonusRate: 0.1)}");
+    print(
+      "Total Salary: \$${salary.calculateTotalSalary(bonusTime: 10, bonusRate: 0.1)}",
+    );
   }
 
   print('''

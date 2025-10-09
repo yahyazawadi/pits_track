@@ -1,4 +1,4 @@
-import 'package:employee_oop/models/employee_model.dart';
+import 'package:employee_oop/employee_model.dart';
 import 'package:employee_oop/pay_type_enum.dart';
 
 abstract class EmployeeRepository {
