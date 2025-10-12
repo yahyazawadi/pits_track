@@ -1,0 +1,37 @@
+[
+    {
+        "id": "1728736921000",
+        "madeAt": "2025-10-12T10:42:01.000Z",
+        "title": "Grocery List",
+        "text": "Buy eggs, milk, and bread.",
+        "editedAt": null
+    },
+    {
+        "id": "1728736935000",
+        "madeAt": "2025-10-12T10:42:15.000Z",
+        "title": "Workout Plan",
+        "text": "Push day: Bench press, dips, push-ups.",
+        "editedAt": "2025-10-12T11:00:00.000Z"
+    },
+    {
+        "id": "1728736952000",
+        "madeAt": "2025-10-12T10:42:32.000Z",
+        "title": "Meeting Notes",
+        "text": "Discuss project deadlines and responsibilities.",
+        "editedAt": null
+    },
+    {
+        "id": "1728736970000",
+        "madeAt": "2025-10-12T10:42:50.000Z",
+        "title": "Book Ideas",
+        "text": "A sci-fi story set on Mars.",
+        "editedAt": null
+    },
+    {
+        "id": "1728736988000",
+        "madeAt": "2025-10-12T10:43:08.000Z",
+        "title": "Reminder",
+        "text": "Call the dentist at 4 PM.",
+        "editedAt": "2025-10-12T10:45:00.000Z"
+    }
+]
