@@ -5,10 +5,10 @@ import 'dart:io';
 import 'package:note_taking_app/models/basic_note.dart';
 import 'package:path_provider/path_provider.dart';
 
-class StorageManager<T extends BasicNote> {
+class Storage<T extends BasicNote> {
   final String filename;
 
-  StorageManager(this.filename);
+  Storage(this.filename);
 
   Future<File> get _file async =>
       File('${(await getApplicationDocumentsDirectory()).path}/$filename');

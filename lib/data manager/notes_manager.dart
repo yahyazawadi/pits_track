@@ -7,13 +7,13 @@ class DataManager<T extends BasicNote> implements NotesRepository<T> {
   final T Function(Map<String, dynamic>) _fromJson;
   final List<T> _items = [];
   bool _initialized = false;
-  final StorageManager<T> _storage;
+  final Storage<T> _storage;
 
   DataManager({
     required String filename,
     required T Function(Map<String, dynamic>) fromJson,
   }) : _fromJson = fromJson,
-       _storage = StorageManager<T>(filename);
+       _storage = Storage<T>(filename);
 
   @override
   Future<void> init() async {

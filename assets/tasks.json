@@ -3,35 +3,35 @@
         "id": "1728736921000",
         "madeAt": "2025-10-12T10:42:01.000Z",
         "title": "Grocery List",
-        "subText": "Buy eggs, milk, and bread.",
+        "isDone": false,
         "editedAt": null
     },
     {
         "id": "1728736935000",
         "madeAt": "2025-10-12T10:42:15.000Z",
         "title": "Workout Plan",
-        "subText": "Push day: Bench press, dips, push-ups.",
+        "isDone": true,
         "editedAt": "2025-10-12T11:00:00.000Z"
     },
     {
         "id": "1728736952000",
         "madeAt": "2025-10-12T10:42:32.000Z",
         "title": "Meeting Notes",
-        "subText": "Discuss project deadlines and responsibilities.",
+        "isDone": false,
         "editedAt": null
     },
     {
         "id": "1728736970000",
         "madeAt": "2025-10-12T10:42:50.000Z",
         "title": "Book Ideas",
-        "subText": "A sci-fi story set on Mars.",
+        "isDone": false,
         "editedAt": null
     },
     {
         "id": "1728736988000",
         "madeAt": "2025-10-12T10:43:08.000Z",
         "title": "Reminder",
-        "subText": "Call the dentist at 4 PM.",
+        "isDone": true,
         "editedAt": "2025-10-12T10:45:00.000Z"
     }
 ]
