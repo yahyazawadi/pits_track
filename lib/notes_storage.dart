@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
-import 'note.dart';
+import 'models/note.dart';
 
 class Storage {
   static Future<File> get _file async =>
