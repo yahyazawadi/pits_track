@@ -34,9 +34,9 @@ class Note extends BasicNote {
   }
 
   @override
-  void update({required String title, String? extraData}) {
+  void update({required String title, String? subText}) {
     super.update(title: title);
-    _subText = extraData;
+    _subText = subText;
   }
 
   String get subText => _subText ?? "";

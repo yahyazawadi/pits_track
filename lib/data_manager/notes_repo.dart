@@ -3,15 +3,24 @@ import 'package:note_taking_app/models/basic_note.dart';
 
 abstract class NotesRepository<T extends BasicNote> {
   Future<void> init();
+
   T? getById(String id);
-  Future<bool> add(T basicNote);
-  Future<bool> updateById({
+
+  Future<void> add(T basicNote);
+
+  Future<void> updateById({
     required String id,
     required String title,
-    required dynamic extraData,
+    required String? subText,
   });
 
-  Future<bool> deleteById(String id);
+  Future<void> deleteById(String id);
+
   Future<void> save();
+
   UnmodifiableListView<T> get basicNotes;
+  int get length;
+  bool get isEmpty;
+
+  T operator [](int index);
 }

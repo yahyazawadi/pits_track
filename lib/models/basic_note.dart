@@ -19,7 +19,7 @@ abstract class BasicNote {
        _title = title,
        _editedAt = editedAt;
 
-  void update({required String title, String? extraData}) {
+  void update({required String title, String? subText}) {
     _title = title;
     _editedAt = DateTime.now();
   }
@@ -54,4 +54,6 @@ abstract class BasicNote {
       'editedAt': _editedAt?.toIso8601String(),
     };
   }
+
+  String? get subText => null;
 }
