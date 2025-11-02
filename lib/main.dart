@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:note_taking_app/data_manager/notes_manager.dart';
+import 'package:note_taking_app/models/note.dart';
+import 'package:note_taking_app/models/task.dart';
 import 'package:provider/provider.dart';
 import 'package:note_taking_app/providers/notes_provider.dart';
 import 'package:note_taking_app/providers/task_provider.dart';
@@ -11,6 +14,20 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (context) => NotesProvider()),
         ChangeNotifierProvider(create: (context) => TasksProvider()),
+        Provider<DataManager<Note>>(
+          create: (_) => DataManager<Note>(
+            filename: "notes.json",
+            assetPath: "assets/notes.json",
+            fromJson: Note.fromJson,
+          ),
+        ),
+        Provider<DataManager<Task>>(
+          create: (_) => DataManager<Task>(
+            filename: "tasks.json",
+            assetPath: "assets/tasks.json",
+            fromJson: Task.fromJson,
+          ),
+        ),
       ],
       child: MyApp(),
     ),

@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:note_taking_app/data_manager/notes_manager.dart';
-import 'package:note_taking_app/models/note.dart';
+import 'package:provider/provider.dart';
 import 'package:note_taking_app/screens/notes/note_card.dart';
+import 'package:note_taking_app/providers/notes_provider.dart';
 import '../../routes/route_names.dart';
 
 class NotesScreen extends StatefulWidget {
-  static DataManager<Note> get notesManager => _notesManager;
-  static final DataManager<Note> _notesManager = DataManager(
-    filename: "notes.json",
-    assetPath: "assets/notes.json",
-    fromJson: Note.fromJson,
-  );
-
   const NotesScreen({super.key});
 
   @override
@@ -20,23 +13,17 @@ class NotesScreen extends StatefulWidget {
 
 class _NotesScreenState extends State<NotesScreen> {
   @override
-  @override
   void initState() {
     super.initState();
     _initializeData();
   }
 
   Future<void> _initializeData() async {
-    // Add a small delay to ensure proper initialization
     await Future.delayed(const Duration(milliseconds: 100));
 
-    if (!NotesScreen.notesManager.initialized) {
-      await NotesScreen.notesManager.init();
-    }
-
-    // Force a refresh to ensure UI is in sync
-    if (mounted) {
-      setState(() {});
+    final notesProvider = Provider.of<NotesProvider>(context, listen: false);
+    if (notesProvider.isLoading) {
+      await notesProvider.init();
     }
   }
 
@@ -52,12 +39,19 @@ class _NotesScreenState extends State<NotesScreen> {
     } else {
       Navigator.pushNamed(context, RouteNames.tasks);
     }
-
-    NotesScreen.notesManager.printAll();
   }
 
   @override
   Widget build(BuildContext context) {
+    final notesProvider = Provider.of<NotesProvider>(context);
+
+    if (notesProvider.isLoading) {
+      return Scaffold(
+        backgroundColor: Colors.black,
+        body: Center(child: CircularProgressIndicator(color: Colors.white)),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -68,7 +62,7 @@ class _NotesScreenState extends State<NotesScreen> {
       body: Container(
         color: Colors.black,
         padding: const EdgeInsets.all(8.0),
-        child: NotesScreen.notesManager.isEmpty
+        child: notesProvider.isEmpty
             ? const Center(
                 child: Text(
                   "write your first note to start",
@@ -82,24 +76,22 @@ class _NotesScreenState extends State<NotesScreen> {
                   mainAxisSpacing: 8.0,
                   childAspectRatio: 0.8,
                 ),
-                itemCount: NotesScreen.notesManager.length,
+                itemCount: notesProvider.length,
                 itemBuilder: (context, index) {
-                  final reversedIndex =
-                      NotesScreen.notesManager.length - 1 - index;
-                  final note = NotesScreen.notesManager[reversedIndex];
+                  final reversedIndex = notesProvider.length - 1 - index;
+                  final note = notesProvider[reversedIndex];
                   return NoteCard(note: note);
                 },
               ),
       ),
-      // Add this to your NotesScreen build method, inside the Scaffold:
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           await Navigator.pushNamed(
             context,
             RouteNames.noteEdit,
-            arguments: null, // null indicates new note
+            arguments: null,
           );
-          setState(() {}); // Refresh after returning
+          // No need to call setState - provider will notify listeners
         },
         backgroundColor: Colors.white,
         child: const Icon(Icons.edit, color: Colors.black),
