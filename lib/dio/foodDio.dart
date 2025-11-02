@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:food/category_model.dart';
-import 'package:food/meal_model.dart';
+import 'package:food/models/category_model.dart';
+import 'package:food/models/meal_model.dart';
 
 class Fooddio {
   static final Fooddio _instance = Fooddio._internal();

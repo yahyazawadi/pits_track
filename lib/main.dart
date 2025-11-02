@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food/dio/foodDio.dart';
-import 'package:food/myRouter.dart';
-import 'package:food/routes.dart';
+import 'package:food/routes/myRouter.dart';
+import 'package:food/routes/routes.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,6 +19,28 @@ class MyApp extends StatelessWidget {
           title: Text(
             'Food App',
             style: TextStyle(color: Colors.white, fontFamily: 'Arial'),
+          ),
+        ),
+        bottomNavigationBar: BottomAppBar(
+          shape: const CircularNotchedRectangle(),
+          notchMargin: 8.0,
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              IconButton(
+                icon: Icon(Icons.home),
+                onPressed: () {
+                  // Navigate to home
+                },
+              ),
+              IconButton(
+                icon: Icon(Icons.category),
+                onPressed: () {
+                  // Navigate to categories
+                },
+              ),
+            ],
           ),
         ),
       ),

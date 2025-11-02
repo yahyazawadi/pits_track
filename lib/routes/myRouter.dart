@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food/routes.dart';
+import 'package:food/routes/routes.dart';
 
 class MyRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -21,5 +21,39 @@ class MyRouter {
       default:
         return MaterialPageRoute(builder: (_) => HomePage());
     }
+  }
+}
+
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(body: Center(child: Text('Home Page')));
+  }
+}
+
+class MealsByCategoryPage extends StatelessWidget {
+  final String category;
+  MealsByCategoryPage({required this.category});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(body: Center(child: Text('Meals by Category: $category')));
+  }
+}
+
+class CategoryPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(body: Center(child: Text('Category Page')));
+  }
+}
+
+class MealDetailPage extends StatelessWidget {
+  final String mealId;
+  MealDetailPage({required this.mealId});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(body: Center(child: Text('Meal Detail for ID: $mealId')));
   }
 }
