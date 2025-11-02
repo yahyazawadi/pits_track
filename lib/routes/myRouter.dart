@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food/routes/routes.dart';
+import 'package:food/screens/categories.dart';
 
 class MyRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -7,12 +8,12 @@ class MyRouter {
       case RouteNames.home:
         return MaterialPageRoute(builder: (_) => HomePage());
       case RouteNames.mealsByCategory:
-        final category = settings.arguments as String;
+        String? category = settings.arguments as String?;
         return MaterialPageRoute(
           builder: (_) => MealsByCategoryPage(category: category),
         );
       case RouteNames.category:
-        return MaterialPageRoute(builder: (_) => CategoryPage());
+        return MaterialPageRoute(builder: (_) => CategoriesScreen());
       case RouteNames.mealDetail:
         final mealId = settings.arguments as String;
         return MaterialPageRoute(
@@ -32,19 +33,14 @@ class HomePage extends StatelessWidget {
 }
 
 class MealsByCategoryPage extends StatelessWidget {
-  final String category;
-  MealsByCategoryPage({required this.category});
+  String? category;
+  MealsByCategoryPage({this.category});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: Text('Meals by Category: $category')));
-  }
-}
-
-class CategoryPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: Text('Category Page')));
+    return Scaffold(
+      body: Center(child: Text('Meals by Category: ${category ?? "Unknown"}')),
+    );
   }
 }
 
