@@ -2,14 +2,12 @@ import 'package:json_annotation/json_annotation.dart';
 part 'meal_model.g.dart';
 
 @JsonSerializable()
-class MealResponse // all meals
-{
+class MealResponseByCategory {
   final List<Meal> meals;
-  MealResponse({required this.meals});
-  factory MealResponse.fromJson(Map<String, dynamic> json) =>
-      _$MealResponseFromJson(json);
-
-  Map<String, dynamic> toJson() => _$MealResponseToJson(this);
+  MealResponseByCategory({required this.meals});
+  factory MealResponseByCategory.fromJson(Map<String, dynamic> json) =>
+      _$MealResponseByCategoryFromJson(json);
+  Map<String, dynamic> toJson() => _$MealResponseByCategoryToJson(this);
 }
 
 @JsonSerializable()
@@ -29,18 +27,7 @@ class Meal {
 }
 
 @JsonSerializable()
-class MealDetailResponse // meal detail
-{
-  final List<MealDetail> mealDetails;
-  MealDetailResponse({required this.mealDetails});
-  factory MealDetailResponse.fromJson(Map<String, dynamic> json) =>
-      _$MealDetailResponseFromJson(json);
-
-  Map<String, dynamic> toJson() => _$MealDetailResponseToJson(this);
-}
-
-@JsonSerializable()
-class MealDetail {
+class MealDetails {
   @JsonKey(name: "idMeal")
   final String id;
   @JsonKey(name: "strMeal")
@@ -52,7 +39,7 @@ class MealDetail {
   @JsonKey(name: "strInstructions")
   final String instructions;
 
-  MealDetail({
+  MealDetails({
     required this.id,
     required this.mealName,
     required this.category,
@@ -60,8 +47,8 @@ class MealDetail {
     required this.instructions,
   });
 
-  factory MealDetail.fromJson(Map<String, dynamic> json) =>
-      _$MealDetailFromJson(json);
+  factory MealDetails.fromJson(Map<String, dynamic> json) =>
+      _$MealDetailsFromJson(json);
 
-  Map<String, dynamic> toJson() => _$MealDetailToJson(this);
+  Map<String, dynamic> toJson() => _$MealDetailsToJson(this);
 }
