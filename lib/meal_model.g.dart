@@ -26,3 +26,30 @@ Map<String, dynamic> _$MealToJson(Meal instance) => <String, dynamic>{
   'idMeal': instance.id,
   'strMealThumb': instance.thumbnail,
 };
+
+MealDetailResponse _$MealDetailResponseFromJson(Map<String, dynamic> json) =>
+    MealDetailResponse(
+      mealDetails: (json['mealDetails'] as List<dynamic>)
+          .map((e) => MealDetail.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$MealDetailResponseToJson(MealDetailResponse instance) =>
+    <String, dynamic>{'mealDetails': instance.mealDetails};
+
+MealDetail _$MealDetailFromJson(Map<String, dynamic> json) => MealDetail(
+  id: json['idMeal'] as String,
+  mealName: json['strMeal'] as String,
+  category: json['strCategory'] as String,
+  thumbnail: json['strMealThumb'] as String,
+  instructions: json['strInstructions'] as String,
+);
+
+Map<String, dynamic> _$MealDetailToJson(MealDetail instance) =>
+    <String, dynamic>{
+      'idMeal': instance.id,
+      'strMeal': instance.mealName,
+      'strCategory': instance.category,
+      'strMealThumb': instance.thumbnail,
+      'strInstructions': instance.instructions,
+    };
