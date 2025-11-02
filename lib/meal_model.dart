@@ -27,6 +27,15 @@ class Meal {
 }
 
 @JsonSerializable()
+class MealDetailsList {
+  final List<MealDetails> meals;
+  MealDetailsList({required this.meals});
+  factory MealDetailsList.fromJson(Map<String, dynamic> json) =>
+      _$MealDetailsListFromJson(json);
+  Map<String, dynamic> toJson() => _$MealDetailsListToJson(this);
+}
+
+@JsonSerializable()
 class MealDetails {
   @JsonKey(name: "idMeal")
   final String id;

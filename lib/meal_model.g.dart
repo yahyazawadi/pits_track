@@ -30,6 +30,16 @@ Map<String, dynamic> _$MealToJson(Meal instance) => <String, dynamic>{
   'strMealThumb': instance.thumbnail,
 };
 
+MealDetailsList _$MealDetailsListFromJson(Map<String, dynamic> json) =>
+    MealDetailsList(
+      meals: (json['meals'] as List<dynamic>)
+          .map((e) => MealDetails.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$MealDetailsListToJson(MealDetailsList instance) =>
+    <String, dynamic>{'meals': instance.meals};
+
 MealDetails _$MealDetailsFromJson(Map<String, dynamic> json) => MealDetails(
   id: json['idMeal'] as String,
   mealName: json['strMeal'] as String,

@@ -5,6 +5,7 @@ import 'package:food/meal_model.dart';
 class Fooddio {
   static final Fooddio _instance = Fooddio._internal();
   late final Dio _dio;
+  factory Fooddio() => _instance;
   Fooddio._internal() {
     _dio = Dio(
       BaseOptions(
@@ -38,8 +39,8 @@ class Fooddio {
   Future<MealDetails> fetchMealDetailsById(String id) async {
     try {
       final responce = await _dio.get("lookup.php?i=$id");
-      final mealDetailsResponce = MealDetails.fromJson(responce.data);
-      return mealDetailsResponce;
+      final mealDetailsResponce = MealDetailsList.fromJson(responce.data);
+      return mealDetailsResponce.meals.first;
     } catch (e) {
       throw Exception('Failed to load meal details: $e');
     }
