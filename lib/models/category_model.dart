@@ -35,4 +35,9 @@ class Category {
       _$CategoryFromJson(json);
 
   Map<String, dynamic> toJson() => _$CategoryToJson(this);
+
+  String get Id => id;
+  String get Name => name;
+  String get Thumbnail => thumbnail;
+  String get Description => description;
 }
