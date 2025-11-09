@@ -38,7 +38,7 @@ class Fooddio {
 
   Future<MealDetails> fetchMealDetailsById(String id) async {
     try {
-      final responce = await _dio.get("lookup.php?i=$id");
+      final responce = await _dio.get("lookup.php", queryParameters: {'i': id});
       final mealDetailsResponce = MealDetailsList.fromJson(responce.data);
       return mealDetailsResponce.meals.first;
     } catch (e) {

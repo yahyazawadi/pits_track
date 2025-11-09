@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food/routes/routes.dart';
-import 'package:food/screens/categories.dart';
+import 'package:food/screens/categories_screen.dart';
 
 class MyRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
