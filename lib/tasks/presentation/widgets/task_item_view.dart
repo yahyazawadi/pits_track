@@ -65,19 +65,14 @@ class TaskItemView extends StatelessWidget {
                           color: kWhiteColor,
                           elevation: 1,
                           onSelected: (value) {
-                            print('Popup menu item $value selected');
                             switch (value) {
                               case 0:
-                                print(
-                                    'Attempting to navigate to update task: ${taskModel.title}');
-
                                 Navigator.of(context).pushNamed(
                                   Pages.updateTask,
                                   arguments: taskModel,
                                 );
                                 break;
                               case 1:
-                                print('Deleting task: ${taskModel.title}');
                                 context
                                     .read<TaskProvider>()
                                     .deleteTask(taskModel.id);
