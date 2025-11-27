@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:task_manager_app/tasks/data/local/model/task_model.dart';
+import 'package:task_manager_app/tasks/data/model/task_model.dart';
 
 class TaskProvider with ChangeNotifier {
   List<TaskModel> _tasks = [];
-  List<TaskModel> get tasks => _tasks;
+  List<TaskModel> get tasks => _tasks; //read only access
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -18,11 +18,12 @@ class TaskProvider with ChangeNotifier {
 
   List<TaskModel>? _cachedDisplayTasks;
   String _lastSearchQuery = '';
-  int _lastSortOption = 2;
+  int _lastSortOption = 0; //default is sort by date
 
   final SharedPreferences _prefs;
 
   TaskProvider(this._prefs) {
+    //dependency injection
     _loadTasks();
   }
 
@@ -71,20 +72,22 @@ class TaskProvider with ChangeNotifier {
 
     filtered.sort((a, b) {
       switch (_currentSortOption) {
-        case 0:
-          if (a.startDateTime == null && b.startDateTime == null) return 0;
-          if (a.startDateTime == null) return 1;
-          if (b.startDateTime == null) return -1;
-          return a.startDateTime!.compareTo(b.startDateTime!);
         case 1:
           if (a.completed && !b.completed) return -1;
           if (!a.completed && b.completed) return 1;
           return 0;
-        case 2:
-        default:
+        case 2: // Sort by pending first
           if (!a.completed && b.completed) return -1;
           if (a.completed && !b.completed) return 1;
           return 0;
+
+        case 0: // Sort by date
+
+        default:
+          if (a.startDateTime == null && b.startDateTime == null) return 0;
+          if (a.startDateTime == null) return 1;
+          if (b.startDateTime == null) return -1;
+          return a.startDateTime!.compareTo(b.startDateTime!);
       }
     });
 
@@ -128,8 +131,9 @@ class TaskProvider with ChangeNotifier {
 
     try {
       if (updatedTask.title.trim().isEmpty) throw 'Task title cannot be blank';
-      if (updatedTask.description.trim().isEmpty)
+      if (updatedTask.description.trim().isEmpty) {
         throw 'Task description cannot be blank';
+      }
       if (updatedTask.startDateTime == null) throw 'Missing task start date';
       if (updatedTask.stopDateTime == null) throw 'Missing task stop date';
 
@@ -144,16 +148,16 @@ class TaskProvider with ChangeNotifier {
       _error = e.toString();
     } finally {
       _isLoading = false;
+      notifyListeners();
     }
-    notifyListeners();
   }
 
-  Future<void> deleteTask(TaskModel task) async {
+  Future<void> deleteTask(String taskId) async {
     _isLoading = true;
     notifyListeners();
 
     try {
-      _tasks.removeWhere((t) => t.id == task.id);
+      _tasks.removeWhere((t) => t.id == taskId);
       await _saveTasks();
       _cachedDisplayTasks = null;
       _error = null;

@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:task_manager_app/components/widgets.dart';
-import 'package:task_manager_app/tasks/data/local/model/task_model.dart';
+import 'package:task_manager_app/tasks/data/model/task_model.dart';
 import 'package:task_manager_app/utils/font_sizes.dart';
 
 import '../../../components/custom_app_bar.dart';
@@ -85,11 +85,11 @@ class _UpdateTaskScreenState extends State<UpdateTaskScreen> {
                         });
                       }
 
-                      if (!taskProvider.isLoading &&
-                          taskProvider.error == null &&
-                          _shouldNavigateBack(taskProvider)) {
+                      if (taskProvider.error != null) {
                         WidgetsBinding.instance.addPostFrameCallback((_) {
-                          Navigator.pop(context);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              getSnackBar(taskProvider.error!, kRed));
+                          taskProvider.clearError();
                         });
                       }
 
@@ -104,7 +104,7 @@ class _UpdateTaskScreenState extends State<UpdateTaskScreen> {
                             },
                             rangeSelectionMode: RangeSelectionMode.toggledOn,
                             focusedDay: _focusedDay,
-                            firstDay: DateTime.utc(2023, 1, 1),
+                            firstDay: DateTime.utc(2025, 1, 1),
                             lastDay: DateTime.utc(2030, 1, 1),
                             onPageChanged: (focusDay) {
                               _focusedDay = focusDay;
@@ -196,7 +196,7 @@ class _UpdateTaskScreenState extends State<UpdateTaskScreen> {
                                 ),
                                 onPressed: taskProvider.isLoading
                                     ? null
-                                    : () {
+                                    : () async {
                                         var taskModel = TaskModel(
                                             id: widget.taskModel.id,
                                             title: title.text,
@@ -205,7 +205,12 @@ class _UpdateTaskScreenState extends State<UpdateTaskScreen> {
                                                 widget.taskModel.completed,
                                             startDateTime: _rangeStart,
                                             stopDateTime: _rangeEnd);
-                                        taskProvider.updateTask(taskModel);
+                                        await taskProvider
+                                            .updateTask(taskModel);
+                                        // Only navigate back if there's no error
+                                        if (taskProvider.error == null) {
+                                          Navigator.pop(context);
+                                        }
                                       },
                                 child: Padding(
                                   padding: const EdgeInsets.all(15),
@@ -224,8 +229,4 @@ class _UpdateTaskScreenState extends State<UpdateTaskScreen> {
                       );
                     })))));
   }
-}
-
-bool _shouldNavigateBack(TaskProvider taskProvider) {
-  return true;
 }

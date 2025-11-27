@@ -6,7 +6,7 @@ import '../../../routes/pages.dart';
 import '../../../utils/color_palette.dart';
 import '../../../utils/font_sizes.dart';
 import '../../../utils/util.dart';
-import '../../data/local/model/task_model.dart';
+import '../../data/model/task_model.dart';
 import '../../data/provider/tasks_provider.dart';
 
 class TaskItemView extends StatelessWidget {
@@ -65,18 +65,22 @@ class TaskItemView extends StatelessWidget {
                           color: kWhiteColor,
                           elevation: 1,
                           onSelected: (value) {
+                            print('Popup menu item $value selected');
                             switch (value) {
                               case 0:
-                                Navigator.pushNamed(
-                                  context,
+                                print(
+                                    'Attempting to navigate to update task: ${taskModel.title}');
+
+                                Navigator.of(context).pushNamed(
                                   Pages.updateTask,
                                   arguments: taskModel,
                                 );
                                 break;
                               case 1:
+                                print('Deleting task: ${taskModel.title}');
                                 context
                                     .read<TaskProvider>()
-                                    .deleteTask(taskModel);
+                                    .deleteTask(taskModel.id);
                                 break;
                             }
                           },

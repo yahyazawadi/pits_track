@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:task_manager_app/components/widgets.dart';
-import 'package:task_manager_app/tasks/data/local/model/task_model.dart';
+import 'package:task_manager_app/tasks/data/model/task_model.dart';
 import 'package:task_manager_app/utils/font_sizes.dart';
 import 'package:task_manager_app/utils/util.dart';
 

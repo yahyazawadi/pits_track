@@ -4,10 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:task_manager_app/components/custom_app_bar.dart';
-import 'package:task_manager_app/tasks/data/local/model/task_model.dart';
+import 'package:task_manager_app/tasks/data/model/task_model.dart';
 import 'package:task_manager_app/tasks/data/provider/tasks_provider.dart';
 import 'package:task_manager_app/components/build_text_field.dart';
-import 'package:task_manager_app/tasks/presentation/widget/task_item_view.dart';
+import 'package:task_manager_app/tasks/presentation/widgets/task_item_view.dart';
 import 'package:task_manager_app/utils/color_palette.dart';
 
 import '../../../components/widgets.dart';

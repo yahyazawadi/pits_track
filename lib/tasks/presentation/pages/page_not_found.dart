@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'components/widgets.dart';
-import 'utils/color_palette.dart';
-import 'utils/font_sizes.dart';
+import '../../../components/widgets.dart';
+import '../../../utils/color_palette.dart';
+import '../../../utils/font_sizes.dart';
 
 class PageNotFound extends StatefulWidget {
   const PageNotFound({super.key});
