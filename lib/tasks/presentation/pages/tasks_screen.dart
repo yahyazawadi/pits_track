@@ -210,19 +210,19 @@ class _TasksScreenState extends State<TasksScreen> {
   Widget _buildSearchEmptyState(Size size, TextEditingController controller) {
     return Column(
       children: [
-        BuildTextField(
-          hint: "Search recent task",
-          controller: controller,
-          inputType: TextInputType.text,
-          prefixIcon: const Icon(
-            Icons.search,
-            color: kGrey2,
-          ),
-          fillColor: kWhiteColor,
-          onChange: (value) {
-            context.read<TaskProvider>().setSearchQuery(value);
-          },
-        ),
+        // BuildTextField(
+        //   hint: "Search recent task",
+        //   controller: controller,
+        //   inputType: TextInputType.text,
+        //   prefixIcon: const Icon(
+        //     Icons.search,
+        //     color: kGrey2,
+        //   ),
+        //   fillColor: kWhiteColor,
+        //   onChange: (value) {
+        //     context.read<TaskProvider>().setSearchQuery(value);
+        //   },
+        // ),
         const SizedBox(height: 20),
         Expanded(
           child: Center(
